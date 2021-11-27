@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo, Children } from 'react';
 
-export default function  Effect() {
+export default function  Memo() {
   const [count, setCount] = useState(0);
   const [num, setNum] = useState(1000);
   const [test, setTest] = useState(0);
@@ -16,7 +16,7 @@ export default function  Effect() {
   }, [test]);
   return (
     <div>
-        <Child count={count} num={num}></Child>
+    <Parent  num={num} count={count}></Parent>
       <button onClick={changeCount}>
         Click me Count
       </button>
@@ -24,14 +24,15 @@ export default function  Effect() {
         Click me Num
       </button>
       <button onClick={changeTest}>
-        Click me Num
+        Click me Test
       </button>
 
     </div>
   );
 }
 
-function Child ({ count, num}) {
+function Child ({ num, count }) {
+    console.log('子组件渲染')
     const child1 = useMemo(() => {
         return (
             <div>
@@ -40,6 +41,7 @@ function Child ({ count, num}) {
             </div>
         );
     }, [num])
+
     const addValue = useMemo(() => {
         console.log('addValue 我是一个复杂的计算');
         let value = 0;
@@ -48,7 +50,12 @@ function Child ({ count, num}) {
         }
         return value;
     }, [num])
-const child2 = <div>{console.log('child2, 我一直变')}我变成了{num}</div>
+
+   const child2 = useMemo(()=>{
+       return (
+        <div>{console.log('child2, 我一直变')}我变成了{count}</div>
+       )
+   }, [count])
     return (
         <React.Fragment>
             {child1}
@@ -57,3 +64,4 @@ const child2 = <div>{console.log('child2, 我一直变')}我变成了{num}</div>
         </React.Fragment>
     );
 }
+const Parent = React.memo(Child)  // pureComponent
