@@ -1,5 +1,6 @@
 
 import Effect from './components/UseEffect'
+import Deposit from './components/Deposit'
 import Callback from './components/UseCallback'
 import Memo from './components/UseMemo'
 import Ref from './components/UseRef'
@@ -7,7 +8,7 @@ const routes = [
     {
         path: 'effect',
         title: 'useEffect',
-        element: <Effect />
+        element: <Deposit />
     },
     {
         path: 'callback',

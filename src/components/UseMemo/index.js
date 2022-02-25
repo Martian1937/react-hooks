@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback, useMemo, Children } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
 export default function  Memo() {
   const [count, setCount] = useState(0);
@@ -69,7 +69,7 @@ function Child ({ num, count }) {
 }
 const Parent = React.memo(Child)  // pureComponent
 
-function useAdd () {
+export const  useAdd =  () => {
   const [count, setCount] = useState(0);
   const [num, setNum] = useState(1000);
   const [test, setTest] = useState(0);
